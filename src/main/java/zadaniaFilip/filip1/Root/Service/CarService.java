@@ -1,16 +1,16 @@
 package zadaniaFilip.filip1.Root.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import zadaniaFilip.filip1.Root.Config;
+import zadaniaFilip.filip1.Root.Car.Car;
+import zadaniaFilip.filip1.Root.Repository.Kompozycja;
 import zadaniaFilip.filip1.Root.Repository.CarRepository;
-import zadaniaFilip.filip1.Root.SongToPlay;
+import zadaniaFilip.filip1.Root.music;
 
 public class CarService {
 
     @Autowired
     CarRepository carRepository;
+
 
 public void playMusic(String songToPlay){
 
@@ -23,13 +23,32 @@ public void playMusic(String songToPlay){
     catch (Exception e){}
 }
 
-private boolean songExistsCheck(String songToPlayName){
+private void songExistsCheck(String songToPlayName){
 
     carRepository.getData(songToPlayName);
-
-
-    return true;
 }
+
+public void addDataTodatabase (Car car){
+
+    music songToAdd = new music();
+    songToAdd.setLength("120");
+    songToAdd.setAuthor("Queen");
+    songToAdd.setName("II");
+
+    createList(car, songToAdd );
+    Kompozycja listKompozycja= new Kompozycja(car, songToAdd);
+
+    carRepository.enterData(listKompozycja);
+
+}
+
+
+private void createList(Car car, music songToAdd){
+
+
+
+}
+
 
 
 }

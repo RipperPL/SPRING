@@ -2,7 +2,7 @@ package zadaniaFilip.filip1.Root;
 
 import org.springframework.data.annotation.Id;
 
-public class SongToPlay {
+public class music {
     @Id
     private String id;
     private String name;

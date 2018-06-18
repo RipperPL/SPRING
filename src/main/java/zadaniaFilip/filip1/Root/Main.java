@@ -8,6 +8,7 @@ import zadaniaFilip.filip1.Root.Car.Car;
 import zadaniaFilip.filip1.Root.Car.Engine;
 import zadaniaFilip.filip1.Root.Car.RadioPlayer;
 import zadaniaFilip.filip1.Root.Car.SteeringWheel;
+import zadaniaFilip.filip1.Root.Service.CarService;
 
 import java.util.Scanner;
 
@@ -19,13 +20,21 @@ public class Main {
 	}
 	{
 
-		CarOwner carOwner= new CarOwner(new Car(new Engine(100), new RadioPlayer(200), new SteeringWheel(200)), "Emil");
+		Car BMW =new  Car(new Engine(100), new RadioPlayer(200), new SteeringWheel(200));
+
 		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-	//	Scanner scan = new Scanner (System.in);
-		String songToPlayName = "Nothing Else Matters";
-				//scan.nextLine();
-		carOwner.playMusic(songToPlayName);
+
+		String songToPlayName = "Nothing else matters";
+
+		CarService carService =context.getBean(CarService.class);
+
+		carService.playMusic(songToPlayName);
+
+		carService.addDataTodatabase(BMW);
+
+
+
 	}
 
 }

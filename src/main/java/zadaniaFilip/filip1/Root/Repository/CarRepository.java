@@ -1,13 +1,9 @@
 package zadaniaFilip.filip1.Root.Repository;
 
-import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import zadaniaFilip.filip1.Root.Config;
-import zadaniaFilip.filip1.Root.SongToPlay;
+import zadaniaFilip.filip1.Root.music;
 
 import java.util.List;
 
@@ -19,13 +15,15 @@ public class CarRepository {
     MongoTemplate mongoTemplate;
 
 
-   public void getData(String songToPlayName) {
+   public List<music> getData(String songToPlayName) {
 
-       SongToPlay songToPlay = new SongToPlay();
+       music songToPlay = new music();
        Query query = new Query(where("name").is(songToPlayName));
-       List<SongToPlay> result = mongoTemplate.find(query, SongToPlay.class);
+       List<music> result = mongoTemplate.find(query, music.class);
 
-//NIE KASUJ - stare a dziala
+
+
+       //NIE KASUJ - stare a dziala
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 //        MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient(), "test");
 //        context.getBean(music.class);
@@ -34,9 +32,12 @@ public class CarRepository {
 
         System.out.println(" Wlasnie słuchasz " + result.get(0).getAuthor() + " " + result.get(0).getName() + " Utwór trwa " + Integer.parseInt(result.get(0).getLength()) / 60 + "min" + Integer.parseInt(result.get(0).getLength()) % 60 + "sek");
 
+        return result;
     }
-    void modifyData(){
-        //
+    public void enterData(Kompozycja listKompozycja){
+
+    mongoTemplate.insert(listKompozycja);
+
     }
     void deleteData(){
         //
