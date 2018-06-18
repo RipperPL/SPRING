@@ -23,6 +23,7 @@ public class CarOwner {
 //        TO JEST BEZ SENSU ALE NIE MIALEM INNEGO POMYSLU - MUSZE WYWOLAC teraz CarService - ale on jest beanem ? ?
 //        CarService carService = new CarService();
 //          Dlatego robię @Autowired w linii 14
+//          wywala blad Nullpointerexception
         carService.playMusic(songToPlayName);
 
 
