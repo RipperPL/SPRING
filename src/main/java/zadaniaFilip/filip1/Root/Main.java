@@ -20,11 +20,11 @@ public class Main {
 	{
 
 		CarOwner carOwner= new CarOwner(new Car(new Engine(100), new RadioPlayer(200), new SteeringWheel(200)), "Emil");
-
 		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-		Scanner scan = new Scanner (System.in);
-		String songToPlayName = scan.nextLine();
+	//	Scanner scan = new Scanner (System.in);
+		String songToPlayName = "Nothing Else Matters";
+				//scan.nextLine();
 		carOwner.playMusic(songToPlayName);
 	}
 
