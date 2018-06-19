@@ -19,6 +19,7 @@ public class CarRepository {
 
        music songToPlay = new music();
        Query query = new Query(where("name").is(songToPlayName));
+
        List<music> result = mongoTemplate.find(query, music.class);
 
 

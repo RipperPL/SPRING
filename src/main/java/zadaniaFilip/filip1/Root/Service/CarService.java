@@ -14,21 +14,21 @@ public class CarService {
 
 public void playMusic(String songToPlay){
 
-    try {
-        songExistsCheck(songToPlay);
-        //sprawdzenie czy piosenka istnieje w bazie
-        //
+        try {
+            songExistsCheck(songToPlay);
+            //sprawdzenie czy piosenka istnieje w bazie
+            //
 
+        }
+        catch (Exception e){}
     }
-    catch (Exception e){}
-}
 
-private void songExistsCheck(String songToPlayName){
+    private void songExistsCheck(String songToPlayName){
 
-    carRepository.getData(songToPlayName);
-}
+        carRepository.getData(songToPlayName);
+    }
 
-public void addDataTodatabase (Car car){
+    public void addDataTodatabase (Car car){
 
     music songToAdd = new music();
     songToAdd.setLength("120");
