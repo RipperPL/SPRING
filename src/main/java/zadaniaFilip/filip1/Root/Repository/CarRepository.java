@@ -3,9 +3,12 @@ package zadaniaFilip.filip1.Root.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import zadaniaFilip.filip1.Root.music;
+import org.springframework.data.mongodb.core.query.Update;
+import zadaniaFilip.filip1.Root.Car.Car;
+import zadaniaFilip.filip1.Root.Car.Song;
 
-import java.util.List;
+
+import java.util.ArrayList;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -14,14 +17,34 @@ public class CarRepository {
     @Autowired
     MongoTemplate mongoTemplate;
 
+    //    adding records to database
+    public void addRecordCar(Car car) {
+        mongoTemplate.insert(car);
+    }
 
-   public List<music> getData(String songToPlayName) {
+    //Existence-check - dB  for specific record
+    public void checkRecord(Car car) {
+        mongoTemplate.findById(car.getId(), Car.class);
+    }
+    public void addRecordSong(Car car, Song song){
 
-       music songToPlay = new music();
-       Query query = new Query(where("name").is(songToPlayName));
+        Query query = new Query(where("id").is(car.getId()));
+        Update update = new Update().push("radioplayer.playList", song);
+        mongoTemplate.updateFirst(query,update, Car.class);
+    }
 
-       List<music> result = mongoTemplate.find(query, music.class);
+    public void deleteRecordSong (Car car, Song song){
 
+        Query query = new Query(where("id").is(car.getId()));
+        Update update = new Update().pull("radioplayer.playList", song);
+        mongoTemplate.updateFirst(query,update, Car.class);
+    }
+
+    public void deleteRecordCar( Car car){
+        mongoTemplate.remove(car);
+
+    }
+}
 
 
        //NIE KASUJ - stare a dziala
@@ -31,18 +54,13 @@ public class CarRepository {
 //        Query query = new Query(where("author").is("Offspring"));
 //        List<music> result = mongoTemplate.find(query, music.class);
 
-        System.out.println(" Wlasnie słuchasz " + result.get(0).getAuthor() + " " + result.get(0).getName() + " Utwór trwa " + Integer.parseInt(result.get(0).getLength()) / 60 + "min" + Integer.parseInt(result.get(0).getLength()) % 60 + "sek");
-
-        return result;
-    }
-    public void enterData(Kompozycja listKompozycja){
-
-    mongoTemplate.insert(listKompozycja);
-
-    }
-    void deleteData(){
-        //
-    }
 
 
-}
+
+
+
+
+
+
+
+

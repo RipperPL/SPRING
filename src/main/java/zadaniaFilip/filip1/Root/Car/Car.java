@@ -1,14 +1,18 @@
 package zadaniaFilip.filip1.Root.Car;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 
 public class Car {
 
 //    komponenty auta
+    @Id
+    private String id;
     private Engine engine;
     private RadioPlayer radioplayer;
     private SteeringWheel steeringwheel;
+
 
     //konstruktor
     public Car(Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
@@ -39,6 +43,14 @@ public class Car {
 
     public void setSteeringwheel(SteeringWheel steeringwheel) {
         this.steeringwheel = steeringwheel;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
 

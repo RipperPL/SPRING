@@ -1,44 +1,23 @@
 package zadaniaFilip.filip1.Root.Car;
 
 
-import zadaniaFilip.filip1.Root.music;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class RadioPlayer {
 
+    private int price;
+    List<Song> playList;
 
-
-    private int cena;
-    private ArrayList<music> musicArrayList;
-
-
-
-
-    public RadioPlayer(int cena) {
-        this.cena = cena;
+    public RadioPlayer(int price, List<Song> playList) {
+        this.price = price;
+        this.playList = playList;
     }
 
-    public int getCena() {
-        return cena;
-    }
+    public void addSongToPlaylist (Song song){
+        this.playList.add(song);
 
-    public void setCena(int cena) {
-        this.cena = cena;
-    }
+}
 
-    public ArrayList<music> getMusicArrayList() {
-        return musicArrayList;
-    }
-
-    public void setMusicArrayList(ArrayList<music> musicArrayList) {
-        this.musicArrayList = musicArrayList;
-    }
-
-    void addToList(music musicArrayListIn){
-        this.musicArrayList.add(musicArrayListIn);
-
-    }
 
 
 }

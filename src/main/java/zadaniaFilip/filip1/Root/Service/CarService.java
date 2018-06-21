@@ -2,53 +2,41 @@ package zadaniaFilip.filip1.Root.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import zadaniaFilip.filip1.Root.Car.Car;
-import zadaniaFilip.filip1.Root.Repository.Kompozycja;
 import zadaniaFilip.filip1.Root.Repository.CarRepository;
-import zadaniaFilip.filip1.Root.music;
+import zadaniaFilip.filip1.Root.Car.Song;
+
+import java.util.ArrayList;
 
 public class CarService {
 
     @Autowired
     CarRepository carRepository;
 
-
-public void playMusic(String songToPlay){
+    //create new car record in db
+    public void addToDatabase(Car carToBeAdded) {
+     carRepository.addRecordCar(carToBeAdded);
+    }
+    //ad song to database
+    public void addToDatabase (Car car, Song songToBeAdded) {
 
         try {
-            songExistsCheck(songToPlay);
-            //sprawdzenie czy piosenka istnieje w bazie
-            //
-
+            //check if the provided car exists in database
+            carRepository.checkRecord(car);
+            //add song to DB
+            carRepository.addRecordSong(car, songToBeAdded);
+        } catch (Exception e) {
         }
-        catch (Exception e){}
+    }
+    //remove song from DB
+    public void removeFromDB (Car car, Song song){
+            carRepository.deleteRecordSong(car, song);
+        }
+    // remove car from DB
+        public void removeFromDB (Car car){
+            carRepository.deleteRecordCar(car);
+        }
+
     }
 
-    private void songExistsCheck(String songToPlayName){
-
-        carRepository.getData(songToPlayName);
-    }
-
-    public void addDataTodatabase (Car car){
-
-    music songToAdd = new music();
-    songToAdd.setLength("120");
-    songToAdd.setAuthor("Queen");
-    songToAdd.setName("II");
-
-    createList(car, songToAdd );
-    Kompozycja listKompozycja= new Kompozycja(car, songToAdd);
-
-    carRepository.enterData(listKompozycja);
-
-}
 
 
-private void createList(Car car, music songToAdd){
-
-
-
-}
-
-
-
-}
