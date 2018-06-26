@@ -1,6 +1,5 @@
 package zadaniaFilip.filip1.Root.Car;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
 

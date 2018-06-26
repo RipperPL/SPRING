@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import zadaniaFilip.filip1.Root.Car.Car;
 import zadaniaFilip.filip1.Root.Repository.CarRepository;
 import zadaniaFilip.filip1.Root.Car.Song;
-
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +13,9 @@ public class CarService {
     CarRepository carRepository;
 
     //add Car record to DB
-    public void addToDatabase(Car carToBeAdded) {
+    public String addToDatabase(Car carToBeAdded) {
         carRepository.addRecordCar(carToBeAdded);
+        return carToBeAdded.getId();
     }
 
     //ad song to database
@@ -31,15 +30,14 @@ public class CarService {
     }
 
     //remove song from DB
-    public void removeFromDB(Car car, Song song) {
-        carRepository.deleteRecordSong(car, song);
+    public void removeFromDB(String carID, Song song) {
+        carRepository.deleteRecordSong(carID, song);
     }
 
     // remove car from DB
-    public void removeFromDB(Car car) {
-        carRepository.deleteRecordCar(car);
+    public void removeFromDB(String carID) {
+        carRepository.deleteRecordCar(carID);
     }
-
 
     public List<Car> getAllCars(){
         List<Car> listOfCars = new ArrayList<Car>();
@@ -51,6 +49,7 @@ public class CarService {
         Car foundCar= carRepository.getRecord(carID);
         return foundCar;
     }
+
 
 
 }

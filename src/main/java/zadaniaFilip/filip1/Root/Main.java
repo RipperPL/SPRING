@@ -25,16 +25,6 @@ public class Main {
 		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 		CarService carService =context.getBean(CarService.class);
 
-		LinkedList<Song> playlist = new LinkedList<Song>();
-		playlist.add(new Song("Bet33terss", "Trupalica", "4323"));
-		Car BMW = new Car( new Engine(10006), new RadioPlayer(2020, playlist), new SteeringWheel(2008));
-
-		carService.addToDatabase(BMW);
-
-		String carID= "5b2bad1b1654f11c80a6c2d2";
-
-		carService.addToDatabase(carID, new Song("songaasd","Emil","99"));
-
 	}
 
 }

@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import zadaniaFilip.filip1.Root.Car.Car;
 import zadaniaFilip.filip1.Root.Car.Song;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,16 +45,17 @@ public class CarRepository {
         mongoTemplate.updateFirst(query,update, Car.class);
     }
 
-    public void deleteRecordSong (Car car, Song song){
+    public void deleteRecordSong (String carID, Song song){
 
-        Query query = new Query(where("id").is(car.getId()));
+        Query query = new Query(where("id").is(carID));
         Update update = new Update().pull("radioplayer.playList", song);
         mongoTemplate.updateFirst(query,update, Car.class);
     }
 
-    public void deleteRecordCar( Car car){
-        mongoTemplate.remove(car);
+    public void deleteRecordCar( String carID){
 
+        Query query = new Query(where("id").is(carID));
+        mongoTemplate.remove(query,Car.class);
     }
 }
 
