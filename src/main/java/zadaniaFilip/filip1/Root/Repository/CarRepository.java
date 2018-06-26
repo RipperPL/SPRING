@@ -9,6 +9,7 @@ import zadaniaFilip.filip1.Root.Car.Song;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -23,12 +24,24 @@ public class CarRepository {
     }
 
     //Existence-check - dB  for specific record
-    public void checkRecord(Car car) {
-        mongoTemplate.findById(car.getId(), Car.class);
+    public Car getRecord(String carID) {
+        Car outputCar= mongoTemplate.findById(carID, Car.class);
+        return outputCar;
     }
-    public void addRecordSong(Car car, Song song){
 
-        Query query = new Query(where("id").is(car.getId()));
+    public List<Car> getRecord()
+
+    {
+        List<Car> allCars = new ArrayList<Car>();
+
+       allCars= mongoTemplate.findAll(Car.class);
+       return allCars;
+    }
+
+
+    public void addRecordSong(String carID, Song song){
+
+        Query query = new Query(where("id").is(carID));
         Update update = new Update().push("radioplayer.playList", song);
         mongoTemplate.updateFirst(query,update, Car.class);
     }
@@ -47,7 +60,7 @@ public class CarRepository {
 }
 
 
-       //NIE KASUJ - stare a dziala
+
 //        ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 //        MongoTemplate mongoTemplate = new MongoTemplate(new MongoClient(), "test");
 //        context.getBean(music.class);

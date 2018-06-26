@@ -15,7 +15,7 @@ public class Car {
 
 
     //konstruktor
-    public Car(Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
+    public Car( Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
         this.engine = engine;
         this.radioplayer = radioplayer;
         this.steeringwheel = steeringwheel;

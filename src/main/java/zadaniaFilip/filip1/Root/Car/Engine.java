@@ -8,7 +8,14 @@ public class Engine  {
     //konstruktor
     public Engine(int power) {
         this.power= power;
+    }
+    public Engine(){}
 
+    public int getPower() {
+        return power;
     }
 
+    public void setPower(int power) {
+        this.power = power;
+    }
 }
