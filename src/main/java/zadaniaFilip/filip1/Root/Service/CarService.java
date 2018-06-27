@@ -1,56 +1,59 @@
 package zadaniaFilip.filip1.Root.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import zadaniaFilip.filip1.Root.Car.Car;
-import zadaniaFilip.filip1.Root.Repository.CarRepository;
 import zadaniaFilip.filip1.Root.Car.Song;
-import java.util.ArrayList;
+import zadaniaFilip.filip1.Root.Repository.CarRepository;
+
+import java.util.LinkedList;
 import java.util.List;
 
+@Service
 public class CarService {
 
     @Autowired
     CarRepository carRepository;
 
-    //add Car record to DB
-    public String addToDatabase(Car carToBeAdded) {
-        carRepository.addRecordCar(carToBeAdded);
-        return carToBeAdded.getId();
+
+    public List<Car> findAll() {
+        return carRepository.findAll();
     }
 
-    //ad song to database
-    public void addToDatabase(String carID, Song songToBeAdded) {
+    public Car findbyId(String id) {
 
-        //check if the provided car exists in database
+        return carRepository.findById(id).get();
+    }
 
-        if ( getCar(carID)!= null) {
-            //add song to DB
-            carRepository.addRecordSong(carID, songToBeAdded);
+    public String insert(Car car) {
+        carRepository.insert(car);
+        return car.getId();
+    }
+
+    public Car addSong(String carID, Song song) {
+
+        Car carToUpdate = this.findbyId(carID);
+        if (carToUpdate.getRadioplayer().getPlayList()==null) {
+            carToUpdate.getRadioplayer().setPlayList(new LinkedList<>());
         }
+        song.setId(carToUpdate.getRadioplayer().getPlayList().size());
+        carToUpdate.getRadioplayer().addSongToPlaylist(song);
+        carRepository.save(carToUpdate);
+        return carToUpdate;
     }
 
-    //remove song from DB
-    public void removeFromDB(String carID, Song song) {
-        carRepository.deleteRecordSong(carID, song);
+    public String delete(String carID) {
+        Car carToDelete = this.findbyId(carID);
+        carRepository.delete(carToDelete);
+        return carToDelete.getId();
     }
 
-    // remove car from DB
-    public void removeFromDB(String carID) {
-        carRepository.deleteRecordCar(carID);
+    public Car deleteSong(String carID, int songID) {
+
+        Car carToUpdate = this.findbyId(carID);
+        carToUpdate.getRadioplayer().deleteSongFromPlaylist(songID);
+        carRepository.save(carToUpdate);
+        return carToUpdate;
     }
-
-    public List<Car> getAllCars(){
-        List<Car> listOfCars = new ArrayList<Car>();
-             listOfCars= carRepository.getRecord();
-        return listOfCars;
-    }
-
-    public Car getCar(String carID){
-        Car foundCar= carRepository.getRecord(carID);
-        return foundCar;
-    }
-
-
 
 }
-
