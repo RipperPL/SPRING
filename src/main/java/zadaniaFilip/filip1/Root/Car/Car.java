@@ -1,19 +1,17 @@
 package zadaniaFilip.filip1.Root.Car;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document
 public class Car {
 
-//    komponenty auta
     @Id
     private String id;
     private Engine engine;
     private RadioPlayer radioplayer;
     private SteeringWheel steeringwheel;
 
-
-    //konstruktor
     public Car( Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
         this.engine = engine;
         this.radioplayer = radioplayer;

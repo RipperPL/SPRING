@@ -2,6 +2,10 @@ package zadaniaFilip.filip1.Root.Car;
 
 
 public class Song {
+    private int id;
+
+
+
     private String name;
     private String author;
     private String length;
@@ -28,6 +32,13 @@ public class Song {
 
     public void setLength(String length) {
         this.length = length;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Song(String name, String author, String length) {
