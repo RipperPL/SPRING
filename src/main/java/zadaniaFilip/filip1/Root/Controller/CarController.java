@@ -30,8 +30,6 @@ public class CarController {
         return foundCar;
     }
 
-    //}
-//
     @ApiOperation("Create a cer and post it to repository")
     @PostMapping("/postCar/{enginePower}-{radioPlayerPrice}-{steeringWheelPrice}")
     public String postCar(
