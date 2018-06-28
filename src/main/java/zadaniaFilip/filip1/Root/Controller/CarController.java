@@ -4,8 +4,11 @@ package zadaniaFilip.filip1.Root.Controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zadaniaFilip.filip1.Root.Car.*;
+import zadaniaFilip.filip1.Root.Exceptions.MetallicaException;
 import zadaniaFilip.filip1.Root.Service.CarService;
 
 import java.util.List;
@@ -40,12 +43,16 @@ public class CarController {
 
     @ApiOperation(value = "Add a song to the chosen database ", notes = "Required to add more songs")
     @PostMapping("/postSong/{carID}")
-    public void postSong( @RequestBody Song song,
-                          @PathVariable String carID){
+    public ResponseEntity<Song> postSong( @RequestBody Song song,
+                          @PathVariable String carID) throws MetallicaException {
 
+        if (song.getAuthor().equals("Metallica")) {
+            throw new MetallicaException();
+//            return new ResponseEntity<Song>(HttpStatus.NOT_ACCEPTABLE)
+        }
         carService.addSong(carID, song);
+        return new ResponseEntity<Song>(HttpStatus.ACCEPTED);
     }
-
 
     @ApiOperation(value = "Delete a chosen car from Database", notes = "Deleting the car")
     @DeleteMapping("/delete/{carID}")

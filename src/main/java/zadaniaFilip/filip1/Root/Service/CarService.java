@@ -32,15 +32,19 @@ public class CarService {
 
     public Car addSong(String carID, Song song) {
 
+
         Car carToUpdate = this.findbyId(carID);
-        if (carToUpdate.getRadioplayer().getPlayList()==null) {
+        if (carToUpdate.getRadioplayer().getPlayList() == null) {
             carToUpdate.getRadioplayer().setPlayList(new LinkedList<>());
         }
+
         song.setId(carToUpdate.getRadioplayer().getPlayList().size());
         carToUpdate.getRadioplayer().addSongToPlaylist(song);
         carRepository.save(carToUpdate);
         return carToUpdate;
     }
+
+
 
     public String delete(String carID) {
         Car carToDelete = this.findbyId(carID);
