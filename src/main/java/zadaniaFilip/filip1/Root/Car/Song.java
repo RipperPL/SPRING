@@ -3,12 +3,11 @@ package zadaniaFilip.filip1.Root.Car;
 
 public class Song {
     private int id;
-
-
-
     private String name;
     private String author;
     private String length;
+
+    public Song(){}
 
     public String getName() {
         return name;

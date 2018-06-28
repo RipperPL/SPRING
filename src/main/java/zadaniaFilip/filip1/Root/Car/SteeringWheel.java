@@ -12,6 +12,7 @@ public class SteeringWheel{
     public void setPrice(int price) {
         this.price = price;
     }
+    public SteeringWheel(){}
 
     public SteeringWheel(int price) {
         this.price = price;

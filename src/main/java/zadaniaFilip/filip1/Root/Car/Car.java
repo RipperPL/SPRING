@@ -12,11 +12,21 @@ public class Car {
     private RadioPlayer radioplayer;
     private SteeringWheel steeringwheel;
 
-    public Car( Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
+    public Car(){}
+
+    public Car(String id, Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
+        this.id = id;
         this.engine = engine;
         this.radioplayer = radioplayer;
         this.steeringwheel = steeringwheel;
     }
+
+//    public Car(Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
+//
+//        this.engine = engine;
+//        this.radioplayer = radioplayer;
+//        this.steeringwheel = steeringwheel;
+//    }
 
     public Engine getEngine() {
         return engine;

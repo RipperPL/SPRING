@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RadioPlayer {
+
+    public RadioPlayer(){}
+
     public int getPrice() {
         return price;
     }
@@ -38,7 +41,6 @@ public class RadioPlayer {
         this.playList.add(song);
 
 }
-
 
     public void deleteSongFromPlaylist (int songID){
 
