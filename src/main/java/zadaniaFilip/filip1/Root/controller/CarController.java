@@ -1,4 +1,4 @@
-package zadaniaFilip.filip1.Root.Controller;
+package zadaniaFilip.filip1.Root.controller;
 
 
 import io.swagger.annotations.Api;
@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import zadaniaFilip.filip1.Root.Car.*;
-import zadaniaFilip.filip1.Root.Exceptions.MetallicaException;
-import zadaniaFilip.filip1.Root.Service.CarService;
+import zadaniaFilip.filip1.Root.model.*;
+import zadaniaFilip.filip1.Root.service.CarService;
 
 import java.util.List;
 
@@ -28,22 +27,21 @@ public class CarController {
 
     @ApiOperation("Get a single car from Database")
     @GetMapping("/car")
-    public Car carGet(@RequestParam(value = "id", defaultValue = "5b2bad1b1654f11c80a6c2d2") String id) {
-        Car foundCar = carService.findbyId(id);
-        return foundCar;
+    public Car carGet(@RequestParam(value = "id", defaultValue = "5b33847c579bbc2728a995c5") String id) {
+        return carService.findbyId(id);
     }
 
     @ApiOperation("Create a cer and post it to repository")
     @RequestMapping(value="/postCar", method = RequestMethod.POST)
-    public  Car createtCar(@RequestBody Car car){
 
+    public Car createtCar(@RequestBody Car car, @RequestHeader("Accept-Encoding") String inputHeader) {
         carService.insert(car);
         return car;
     }
 
     @ApiOperation(value = "Add a song to the chosen database ", notes = "Required to add more songs")
     @PostMapping("/postSong/{carID}")
-    public ResponseEntity<Song> postSong( @RequestBody Song song,
+    public ResponseEntity postSong( @RequestBody Song song,
                           @PathVariable String carID) throws MetallicaException {
 
         if (song.getAuthor().equals("Metallica")) {
@@ -51,18 +49,17 @@ public class CarController {
 //            return new ResponseEntity<Song>(HttpStatus.NOT_ACCEPTABLE)
         }
         carService.addSong(carID, song);
-        return new ResponseEntity<Song>(HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @ApiOperation(value = "Delete a chosen car from Database", notes = "Deleting the car")
     @DeleteMapping("/delete/{carID}")
     public void deleteCar(@PathVariable String carID) {
-
         carService.delete(carID);
     }
 
 
-    @ApiOperation(value = "Delete a chosen song from a chosen Car", notes = "Provided that the car and song exist it is possible to delete a record")
+    @ApiOperation(value = "Delete a chosen song from a chosen model", notes = "Provided that the car and song exist it is possible to delete a record")
     @DeleteMapping("/delete/{carID}/{songID}")
     public void deleteSong(@PathVariable String carID,
                            @PathVariable String songID){

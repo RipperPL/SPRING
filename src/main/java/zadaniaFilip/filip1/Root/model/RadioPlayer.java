@@ -1,4 +1,4 @@
-package zadaniaFilip.filip1.Root.Car;
+package zadaniaFilip.filip1.Root.model;
 
 
 import java.util.LinkedList;

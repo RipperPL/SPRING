@@ -1,4 +1,4 @@
-package zadaniaFilip.filip1.Root.Car;
+package zadaniaFilip.filip1.Root.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,7 +21,7 @@ public class Car {
         this.steeringwheel = steeringwheel;
     }
 
-//    public Car(Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
+//    public model(Engine engine, RadioPlayer radioplayer, SteeringWheel steeringwheel) {
 //
 //        this.engine = engine;
 //        this.radioplayer = radioplayer;

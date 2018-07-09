@@ -1,10 +1,10 @@
-package zadaniaFilip.filip1.Root.Service;
+package zadaniaFilip.filip1.Root.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zadaniaFilip.filip1.Root.Car.Car;
-import zadaniaFilip.filip1.Root.Car.Song;
-import zadaniaFilip.filip1.Root.Repository.CarRepository;
+import zadaniaFilip.filip1.Root.model.Car;
+import zadaniaFilip.filip1.Root.model.Song;
+import zadaniaFilip.filip1.Root.repository.CarRepository;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,8 +31,6 @@ public class CarService {
     }
 
     public Car addSong(String carID, Song song) {
-
-
         Car carToUpdate = this.findbyId(carID);
         if (carToUpdate.getRadioplayer().getPlayList() == null) {
             carToUpdate.getRadioplayer().setPlayList(new LinkedList<>());
